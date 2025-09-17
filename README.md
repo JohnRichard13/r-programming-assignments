@@ -59,3 +59,70 @@ ggplot(df_long, aes(x = Name, y = value, fill = variable)) +
   theme_minimal()
 
   <img width="678" height="555" alt="image" src="https://github.com/user-attachments/assets/13355c21-8a20-4c23-85c3-fbcf43e2f2c5" />
+
+Module #4 Assignemnt
+Visualizing and Interpreting Hospital Patient Data
+
+Freqeuncy <- c(0.6, 0.3, 0.4, 0.4, 0.2, 0.6, 0.3, 0.4, 0.9, 0.2)
+BloodPressure <- c(103, 87, 32, 42, 59, 109, 78, 205, 135, 176)
+FirstAssess <- c(1, 1, 1, 1, 0, 0, 0, 0, NA, 1)
+SecondAssess <- c(0, 0, 1, 1, 0, 0, 1, 1, 1, 1)
+FinalDecision <- c(0, 1, 0, 1, 0, 1, 0, 1, 1, 1)
+
+
+df_hosp <- data.frame(
+  Freqeuncy, BloodPressure, FirstAssess,
+  SecondAssess, FinalDecision, stringsAsFactors = FALSE
+)
+
+summary(df_hosp)
+df_hosp <- na.omit(df_hosp)
+
+
+boxplot(
+  BloodPressure ~ FirstAssess,
+  data = df_hosp,
+  names = c("Good", "Bad"),
+  ylab = "Blood Pressure",
+  main = "BP by First MD Assessment"
+)
+
+<img width="686" height="507" alt="image" src="https://github.com/user-attachments/assets/04eebbda-5d2c-4d33-801b-eb47a6a07261" />
+
+boxplot(
+  BloodPressure ~ SecondAssess,
+  data = df_hosp,
+  names = c("Low","High"),
+  ylab = "Blood Pressure",
+  main = "BP by Second MD Assessment"
+)
+
+<img width="690" height="516" alt="image" src="https://github.com/user-attachments/assets/8c140201-a767-46a0-9514-9579ec2674fe" />
+
+boxplot(
+  BloodPressure ~ FinalDecision,
+  data = df_hosp,
+  names = c("Low", "High"),
+  ylab = "Blood Pressure",
+  main = "BP by Final Decision"
+)
+
+<img width="666" height="507" alt="image" src="https://github.com/user-attachments/assets/3ffd14f2-8a42-45fb-beaa-670d032bebd4" />
+
+hist(
+  df_hosp$Freqeuncy,
+  breaks = seq(0, 1, by = 0.1),
+  xlab = "Visit Frequency",
+  main = "Histogram of Visit Frequency"
+)
+
+<img width="685" height="509" alt="image" src="https://github.com/user-attachments/assets/3091c5ca-0529-43e5-8233-9572322ab888" />
+
+hist(
+  df_hosp$BloodPressure,
+  breaks = 8,
+  xlab = "Blood Pressure",
+  main = "Histogram of Blood Pressure"
+)
+
+<img width="686" height="517" alt="image" src="https://github.com/user-attachments/assets/695144e3-d40b-46d4-b2d3-52be0b5fd2a7" />
