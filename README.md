@@ -126,3 +126,23 @@ hist(
 )
 
 <img width="686" height="517" alt="image" src="https://github.com/user-attachments/assets/695144e3-d40b-46d4-b2d3-52be0b5fd2a7" />
+
+Module #5 Assignment
+Matrix Algebra in R
+
+A <- matrix(1:100, nrow = 10)
+B <- matrix(1:1000, nrow = 10)
+
+dim(A) 
+dim(B)
+
+invA <- solve(A)
+detA <- det(A)
+
+invB <- tryCatch(solve(B), error = function(e) e)
+detB <- tryCatch(det(B),   error = function(e) e)
+
+print(invA)
+print(detA)
+print(invB)
+print(detB)
