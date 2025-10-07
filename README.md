@@ -168,4 +168,51 @@ M[1, 2:5] <- 1
 M[2:5, 1] <- 2
 M
 
+Module #7 Assignment
+Exploring R’s Object Oriented Systems
 
+data("mtcars")
+head(mtcars)
+str(mtcars)
+
+print(mtcars)
+
+
+summary(mtcars)
+summary(mtcars$mpg)
+
+
+plot(mtcars$mpg, mtcars$hp, main = "MPG vs Horsepower", xlab = "MPG", ylab = "Horsepower")
+plot(as.factor(mtcars$cyl), mtcars$mpg, main="MPG by Cylinders")
+
+
+class(mtcars)
+class(mtcars$mpg)
+
+
+s3_obj <- list(name = "John", age = 22, GPA = 3.7)
+class(s3_obj) <- "student_s3"
+
+
+print.student_s3 <- function(x) {
+  cat("S3 Student Object:\n")
+  cat("Name:", x$name, "\nAge:", x$age, "\nGPA:", x$GPA, "\n")
+  
+}
+
+
+print(s3_obj)
+
+
+setClass("student_s4",
+         slots = c(name = "character", age = "numeric", GPA = "numeric"))
+
+s4_obj <- new("student_s4", name = "John", age = 22, GPA = 3.7)
+
+
+setMethod("show", "student_s4", function(object) {
+  cat("S4 Student Object:\n")
+  cat("Name:", object@name, "\nAge:", object@age, "\nGPA:", object@GPA, "\n")
+})
+
+s4_obj
