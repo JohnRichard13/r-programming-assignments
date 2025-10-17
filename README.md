@@ -209,10 +209,57 @@ setClass("student_s4",
 
 s4_obj <- new("student_s4", name = "John", age = 22, GPA = 3.7)
 
-
 setMethod("show", "student_s4", function(object) {
   cat("S4 Student Object:\n")
   cat("Name:", object@name, "\nAge:", object@age, "\nGPA:", object@GPA, "\n")
 })
 
 s4_obj
+
+Module #8 Assignment
+Input/Output, String Manipulation, and the plyr Package
+
+student6 <- read.table("Assignment 6 Dataset.txt", header = TRUE, sep = "," , stringsAsFactors = FALSE)
+
+head(student6)
+
+library(plyr)
+gender_mean <- ddply(
+  student6,
+  "Sex",
+  summarise,
+  GradeAverage = mean(Grade, na.rm = TRUE)
+)
+
+print(gender_mean)
+
+write.table(
+  gender_mean,
+  file = "gender_mean.txt",
+  sep = "\t",
+  row.names = FALSE
+)
+
+
+i_students <- subset(
+  student6,
+  grepl("i", Name, ignore.case = TRUE)
+)
+
+i_students
+
+write.csv(
+  i_students$Name, 
+  file = "i_students.csv",
+  row.names = FALSE,
+  quote = FALSE
+)
+
+
+write.csv(
+  i_students,
+  file = "i_students_full,csv",
+  row.names = FALSE
+)
+
+list.files()
