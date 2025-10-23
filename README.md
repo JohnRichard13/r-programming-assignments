@@ -263,3 +263,61 @@ write.csv(
 )
 
 list.files()
+
+
+Module # 9 Assignment
+Visualization in R - Base Graphics, Lattice, and ggplot2.
+
+data("airquality")
+
+head(airquality)
+
+str(airquality)
+
+summary(airquality)
+
+air_data <- na.omit(airquality)
+
+plot(air_data$Temp, air_data$Ozone,
+     main = "Base R: Ozone vs Temperature",
+     xlab = "Temperature (F)",
+     ylab = "Ozone (ppb)",
+     col = "blue",
+     pch = 16)
+
+hist(air_data$Wind,
+     main = "Base R: Wind Distribution",
+     xlab = "Wind (mph)",
+     col = "lightgreen",
+     breaks = 10)
+
+library(lattice)
+
+xyplot(Ozone ~ Temp | factor(Month),
+       data = air_data,
+       main = "Lattice: Ozone vs Temp by Month",
+       xlab = "Temperature (F)",
+       ylab = "Ozone (ppb)",
+       pch = 16,
+       col = "blue")
+
+bwplot(Ozone ~ factor(Month),
+       data = air_data,
+       main = "Lattice: Ozone by Month")
+
+library(ggplot2)
+
+ggplot(air_data, aes(x = Temp, y = Ozone)) +
+  geom_point(color = "blue") +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  facet_wrap(~ Month) +
+  labs(title = "ggplot2: Ozone vs Temp by Month",
+       x = "Temperature (F)",
+       y = "Ozone (ppb)")
+
+ggplot(air_data, aes(x = Wind)) +
+  geom_histogram(binwidth = 1, fill = "lightgreen", color = "black") +
+  labs(title = "ggplot2: Wind Distribution",
+       x = "Wind (mph)",
+       y = "Count")
+  
