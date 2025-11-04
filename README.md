@@ -321,3 +321,29 @@ ggplot(air_data, aes(x = Wind)) +
        x = "Wind (mph)",
        y = "Count")
   
+Module # 11 Assignment
+tukey.outlier <- function(x) {
+  q1 <- quantile(x, 0.25, na.rm = TRUE)
+  q3 <- quantile(x, 0.75, na.rm = TRUE)
+  iqr <- q3 - q1
+  (x < (q1 - 1.5 * iqr)) | (x > (q3 + 1.5 * iqr))
+}
+
+
+tukey_multiple <- function(x) {
+  outliers <- array(TRUE, dim = dim(x))
+  for (j in seq_len(ncol(x))) {
+    outliers[, j] <- outliers[, j] & tukey.outlier(x[, j])
+  }
+  
+  outlier.vec <- logical(nrow(x))
+  for (i in seq_len(nrow(x))) {
+    outlier.vec[i] <- all(outliers[i, ])
+  }
+  
+  return(outlier.vec)
+}
+
+set.seed(123)
+test_mat <- matrix(rnorm(50), nrow = 10)
+tukey_multiple(test_mat)
